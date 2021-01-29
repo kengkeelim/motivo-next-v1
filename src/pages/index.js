@@ -10,6 +10,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      {/* TODO: Add background image to header */}
+      {/* TODO: Add lazy loading or animation for text to appear */}
+
       <header className="h-screen box-border">
         <div className="h-screen px-10 box-border grid place-items-center">
           <div className="">
@@ -255,6 +258,9 @@ export default function Home() {
               enquiry@motivo.marketing
             </span>
           </div>
+
+          {/* TODO: Style the link with tailwind class */}
+          
           <Link href="/privacy">
             <a sx={{ color: "text", fontSize: 3, cursor: "pointer", marginTop: "1.5rem" }}>
               Privacy Policy
