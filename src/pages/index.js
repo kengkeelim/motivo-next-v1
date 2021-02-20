@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import NavBar from "../components/navBar";
 
@@ -13,29 +13,12 @@ import undraw5 from "../assets/undraw_team_goals_hrii.svg";
 
 import styles from "../styles/Home.module.css";
 
-// function usePrevious(value) {
-//   // The ref object is a generic container whose current property is mutable ...
-//   // ... and can hold any value, similar to an instance property on a class
-//   const ref = useRef();
-
-//   // Store current value in ref
-//   useEffect(() => {
-//     ref.current = value;
-//   }, [value]); // Only re-run if value changes
-
-//   // Return previous value (happens before update in useEffect above)
-//   return ref.current;
-// }
-
 export default function Home() {
   const [openMenu, setOpenMenu] = useState(false);
   const [activeLink, setActiveLink] = useState(null);
-  // const [documentValue, setDocumentValue] = useState(null);
   const [sectionValue, setSectionValue] = useState(null);
   const [navValue, setNavValue] = useState(null);
   const [scrolling, setScrolling] = useState(null);
-
-  // const prevLink = usePrevious(activeLink);
 
   const getSectionInfo = () => {
     const allSectionId = ["solutions", "workflow", "testimonials"];
@@ -64,27 +47,9 @@ export default function Home() {
     }
   };
 
-  // const getDocumentInfo = () => {
-  //   const body = document.querySelector("body");
-  //   if (body) {
-  //     const document = {
-  //       scrollHeight: body.scrollHeight,
-  //       clientHeight: body.clientHeight,
-  //     };
-  //     setDocumentValue(document);
-  //   }
-  // };
-
-  // const checkActiveLink = (id) => {
-  //   if (prevLink !== id) {
-  //     setActiveLink(id);
-  //   }
-  // };
-
   const handleScroll = () => {
     const yPos = window.pageYOffset;
     let solutionsSection = {};
-    // let lastSection = {};
 
     if (yPos === 0) {
       setScrolling(false);
@@ -94,7 +59,6 @@ export default function Home() {
 
     if (sectionValue) {
       solutionsSection = sectionValue[0];
-      // lastSection = sectionValue[sectionValue.length - 1];
 
       sectionValue.forEach((section) => {
         // When scroll within the section, set nav link to active.
@@ -606,7 +570,7 @@ export default function Home() {
           >
             <div className="px-10 md:px-4 md:w-2/3 lg:px-0 lg:mr-20">
               <h2 className="text-white text-3xl font-bold italic md:text-4xl">
-                "<span className="text-purple-800">Everyone</span> is not your{" "}
+                "<span className="text-purple-800">Everyone</span> is not your
                 <span className="text-purple-800">customer</span>."
               </h2>
               <p className="mt-6 text-gray-200">Seth Godin</p>
