@@ -1,19 +1,25 @@
 import React from "react";
 import Head from "next/head";
+import JotformEmbed from "react-jotform-embed";
 import NavBar from "../components/navBar";
 
 function GetStarted() {
   return (
-    <div>
+    <div className="h-screen w-screen">
       <Head>
-        <title>Motivo | Sign Up</title>
+        <title>Motivo | Get Started</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <NavBar />
-      <section className="p-10 max-w-screen-md m-auto mt-16 md:mt-20">
-        this is sign up page
+      <section className="h-auto w-auto">
+        <NavBar />
+        <JotformEmbed src="https://form.jotform.com/210382996785067" />
       </section>
+      <footer className="h-auto bg-black text-xs text-gray-200">
+        <div className="p-10 text-center">
+          Copyright 2021 @ Motivo Ventures <br />- All Rights Reserved -
+        </div>
+      </footer>
     </div>
   );
 }
