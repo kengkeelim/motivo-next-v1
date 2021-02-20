@@ -1,3 +1,66 @@
 .hero {
-  background-image: url("../assets/4931029.webp");
+  background-image: url("../assets/milad-b-fakurian-Em2nS9yY4dU-unsplash.jpg");
+}
+
+.navItems {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.5rem;
+  background-color: #4c1d95;
+  background: -webkit-linear-gradient(
+    to bottom right,
+    #4c1d95,
+    #000
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #4c1d95,
+    #000
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  color: #f3f4f6;
+  transform: translateX(100%);
+  transition: all 1s ease-in-out;
+  z-index: 10;
+}
+
+.navItems div a:active {
+  color: #b91c1c;
+}
+
+.slideIn {
+  transform: translateX(0);
+}
+
+@media only screen and (min-width: 768px) {
+  .navItems {
+    position: relative;
+    flex-direction: row;
+    background-color: transparent;
+    background: none;
+    transform: translateX(0);
+    column-gap: 1.5rem;
+    width: 100%;
+    height: 5rem;
+  }
+
+  .hero2 {
+    background-image: url("../assets/david-werbrouck-lnDNev7I4QE-unsplash.jpg");
+  }
+
+  .quoteImage {
+    background-image: url("../assets/Seth-Godin-Explains-How-to-Overcome-the-Fear-of-Failure.jpg");
+  }
+}
+
+/* customize tailwind */
+.active\:text-red-600:active {
+  color: #dc2626;
 }

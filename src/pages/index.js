@@ -1,19 +1,153 @@
 import Head from "next/head";
 import Link from "next/link";
 
+import { useState, useEffect, useRef } from "react";
+
 import NavBar from "../components/navBar";
 
-import undraw1 from "../assets/undraw_Forms_re_pkrt.svg";
-import undraw2 from "../assets/undraw_Booked_re_vtod.svg";
-import undraw3 from "../assets/undraw_business_chat_ldig.svg";
+import undraw1 from "../assets/undraw_fill_forms_yltj.svg";
+import undraw2 from "../assets/undraw_Booking_re_gw4j.svg";
+import undraw3 from "../assets/undraw_video_call_kxyp.svg";
 import undraw4 from "../assets/undraw_business_deal_cpi9.svg";
 import undraw5 from "../assets/undraw_team_goals_hrii.svg";
 
 import styles from "../styles/Home.module.css";
 
+// function usePrevious(value) {
+//   // The ref object is a generic container whose current property is mutable ...
+//   // ... and can hold any value, similar to an instance property on a class
+//   const ref = useRef();
+
+//   // Store current value in ref
+//   useEffect(() => {
+//     ref.current = value;
+//   }, [value]); // Only re-run if value changes
+
+//   // Return previous value (happens before update in useEffect above)
+//   return ref.current;
+// }
+
 export default function Home() {
+  const [openMenu, setOpenMenu] = useState(false);
+  const [activeLink, setActiveLink] = useState(null);
+  // const [documentValue, setDocumentValue] = useState(null);
+  const [sectionValue, setSectionValue] = useState(null);
+  const [navValue, setNavValue] = useState(null);
+  const [scrolling, setScrolling] = useState(null);
+
+  // const prevLink = usePrevious(activeLink);
+
+  const getSectionInfo = () => {
+    const allSectionId = ["solutions", "workflow", "testimonials"];
+
+    let sectionInfo = allSectionId.map((id) => {
+      let section = document.getElementById(id);
+
+      return {
+        id,
+        offsetTop: section.offsetTop,
+        offsetHeight: section.offsetHeight,
+      };
+    });
+
+    setSectionValue(sectionInfo);
+  };
+
+  const getNavInfo = () => {
+    const nav = document.querySelector("nav");
+    if (nav) {
+      setNavValue(nav.offsetHeight);
+    } else if (window.innerWidth >= 768) {
+      setNavValue(80);
+    } else {
+      setNavValue(64);
+    }
+  };
+
+  // const getDocumentInfo = () => {
+  //   const body = document.querySelector("body");
+  //   if (body) {
+  //     const document = {
+  //       scrollHeight: body.scrollHeight,
+  //       clientHeight: body.clientHeight,
+  //     };
+  //     setDocumentValue(document);
+  //   }
+  // };
+
+  // const checkActiveLink = (id) => {
+  //   if (prevLink !== id) {
+  //     setActiveLink(id);
+  //   }
+  // };
+
+  const handleScroll = () => {
+    const yPos = window.pageYOffset;
+    let solutionsSection = {};
+    // let lastSection = {};
+
+    if (yPos === 0) {
+      setScrolling(false);
+    } else {
+      setScrolling(true);
+    }
+
+    if (sectionValue) {
+      solutionsSection = sectionValue[0];
+      // lastSection = sectionValue[sectionValue.length - 1];
+
+      sectionValue.forEach((section) => {
+        // When scroll within the section, set nav link to active.
+        if (
+          section.offsetTop <= yPos + navValue &&
+          section.offsetTop + section.offsetHeight > yPos
+        ) {
+          setActiveLink(section.id);
+        } else if (yPos + navValue < solutionsSection.offsetTop) {
+          setActiveLink(null);
+        }
+        // else if (
+        //   yPos ===
+        //   documentValue.scrollHeight - documentValue.clientHeight
+        // ) {
+        //   setActiveLink(lastSection.id);
+        // }
+      });
+    }
+  };
+
+  useEffect(() => {
+    getSectionInfo();
+    getNavInfo();
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("scroll", handleScroll);
+    return () => {
+      document.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("touchstart", handleScroll);
+    return () => {
+      document.removeEventListener("touchstart", handleScroll);
+    };
+  }, []);
+
+  if (typeof window !== "undefined") {
+    const body = document.querySelector("body");
+    if (window.innerWidth < 768 && openMenu) {
+      body.style.overflow = "hidden";
+      body.scroll = "no";
+    } else {
+      body.style.overflow = "scroll";
+      body.scroll = "yes";
+    }
+  }
+
   return (
-    <div className="w-full h-screen">
+    <div className="h-screen w-screen">
       <Head>
         <title>Motivo | A Marketing Company</title>
         <link rel="icon" href="/favicon.ico" />
@@ -21,22 +155,150 @@ export default function Home() {
 
       <header
         id="header"
-        className={`h-screen box-border ${styles.hero} bg-cover bg-no-repeat bg-local md:h-2/3 xl:h-screen`}
+        className={`h-screen box-border ${styles.hero} bg-cover bg-no-repeat bg-local md:h-5/6 xl:h-screen`}
       >
-        <NavBar navItems />
-        <div className="h-full px-10 box-border grid place-items-center md:max-w-2xl md:m-auto lg:max-w-4xl lg:flex lg:flex-row">
-          <div className="lg:w-2/3">
-            <h1 className="text-4xl font-black">Set Your Business On Fire</h1>
-            <p className="text-sm mt-6 text-gray-500">
+        <NavBar>
+          <div className="menu">
+            <button
+              type="button"
+              className={`block ${
+                scrolling ? "text-gray-400" : "text-gray-200"
+              } focus:outline-none md:hidden`}
+              onClick={() => setOpenMenu(!openMenu)}
+            >
+              <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z" />
+              </svg>
+            </button>
+
+            <div
+              className={
+                openMenu
+                  ? `${styles.navItems} ${styles.slideIn}`
+                  : `${styles.navItems}`
+              }
+            >
+              <div className="cancel w-3/5 md:hidden">
+                <button
+                  type="button"
+                  className="block float-right focus:outline-none"
+                  onClick={() => setOpenMenu(!openMenu)}
+                >
+                  <svg
+                    className="h-6 w-6 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 511.995 511.995"
+                  >
+                    <g>
+                      <g>
+                        <path
+                          d="M437.126,74.939c-99.826-99.826-262.307-99.826-362.133,0C26.637,123.314,0,187.617,0,256.005
+			s26.637,132.691,74.993,181.047c49.923,49.923,115.495,74.874,181.066,74.874s131.144-24.951,181.066-74.874
+			C536.951,337.226,536.951,174.784,437.126,74.939z M409.08,409.006c-84.375,84.375-221.667,84.375-306.042,0
+			c-40.858-40.858-63.37-95.204-63.37-153.001s22.512-112.143,63.37-153.021c84.375-84.375,221.667-84.355,306.042,0
+			C493.435,187.359,493.435,324.651,409.08,409.006z"
+                        />
+                      </g>
+                    </g>
+                    <g>
+                      <g>
+                        <path
+                          d="M341.525,310.827l-56.151-56.071l56.151-56.071c7.735-7.735,7.735-20.29,0.02-28.046
+			c-7.755-7.775-20.31-7.755-28.065-0.02l-56.19,56.111l-56.19-56.111c-7.755-7.735-20.31-7.755-28.065,0.02
+			c-7.735,7.755-7.735,20.31,0.02,28.046l56.151,56.071l-56.151,56.071c-7.755,7.735-7.755,20.29-0.02,28.046
+			c3.868,3.887,8.965,5.811,14.043,5.811s10.155-1.944,14.023-5.792l56.19-56.111l56.19,56.111
+			c3.868,3.868,8.945,5.792,14.023,5.792c5.078,0,10.175-1.944,14.043-5.811C349.28,331.117,349.28,318.562,341.525,310.827z"
+                        />
+                      </g>
+                    </g>
+                  </svg>
+                </button>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveLink("solutions");
+                  setOpenMenu(!openMenu);
+                }}
+                className={`${
+                  activeLink === "solutions"
+                    ? "text-yellow-500"
+                    : scrolling
+                    ? "md:text-gray-400"
+                    : "md:text-gray-200"
+                }
+                } text-sm font-semibold md:hover:text-yellow-500 transition-all`}
+              >
+                <Link href="/#solutions">
+                  <a>Solutions</a>
+                </Link>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveLink("workflow");
+                  setOpenMenu(!openMenu);
+                }}
+                className={`${
+                  activeLink === "workflow"
+                    ? "text-yellow-500"
+                    : scrolling
+                    ? "md:text-gray-400"
+                    : "md:text-gray-200"
+                }
+              } text-sm font-semibold md:hover:text-yellow-500 transition-all`}
+              >
+                <Link href="/#workflow">
+                  <a>Workflow</a>
+                </Link>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveLink("testimonials");
+                  setOpenMenu(!openMenu);
+                }}
+                className={`${
+                  activeLink === "testimonials"
+                    ? "text-yellow-500"
+                    : scrolling
+                    ? "md:text-gray-400"
+                    : "md:text-gray-200"
+                }
+              } text-sm font-semibold md:hover:text-yellow-500 transition-all`}
+              >
+                <Link href="/#testimonials">
+                  <a>Testimonials</a>
+                </Link>
+              </button>
+              <Link href="/getStarted" as="/get-started" replace>
+                <a>
+                  <button
+                    type="button"
+                    className="leading-10 w-40 block text-sm font-semibold bg-yellow-400 text-black rounded shadow-md hover:bg-yellow-500 focus:outline-none"
+                  >
+                    GET STARTED
+                  </button>
+                </a>
+              </Link>
+            </div>
+          </div>
+        </NavBar>
+        <div className="h-full px-10 box-border grid place-items-center m-auto md:max-w-3xl lg:max-w-4xl">
+          <div className="md:w-2/3 lg:w-5/6">
+            <h1 className="text-5xl font-black text-white lg:text-7xl">
+              Set Your Business On Fire
+            </h1>
+            <p className="text-sm mt-6 text-gray-200 lg:text-base">
               We plan and execute marketing campaigns for businesses and
               streamline with their fulfillment processes for best customer
               experience.
             </p>
-            <Link href="/getStarted" as="/get-started">
+            <Link href="/getStarted" as="/get-started" replace>
               <a>
                 <button
                   type="button"
-                  className="mt-10 leading-10 w-40 block text-sm font-semibold bg-red-600 text-white rounded shadow-md hover:bg-red-700 focus:outline-none"
+                  className="mt-10 leading-10 w-40 block text-sm font-semibold bg-yellow-400 text-black rounded shadow-md hover:bg-yellow-500 focus:outline-none"
                 >
                   GET STARTED
                 </button>
@@ -45,7 +307,7 @@ export default function Home() {
           </div>
           <div className="w-full absolute bottom-2 left-0 md:hidden xl:block">
             <svg
-              className="text-gray-400 fill-current h-6 w-auto m-auto animate-bounce xl:h-8"
+              className="text-gray-200 fill-current h-6 w-auto m-auto animate-bounce xl:h-8"
               version="1.1"
               id="Capa_1"
               xmlns="http://www.w3.org/2000/svg"
@@ -80,24 +342,26 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="">
+      <main>
         <section className="py-20 px-10 md:max-w-2xl md:m-auto lg:max-w-4xl">
-          <h2 className="text-2xl font-bold">PAIN POINTS THAT WE FOCUS</h2>
+          <h2 className="text-2xl text-gray-800 font-bold">
+            PAIN POINTS THAT WE FOCUS
+          </h2>
           <div className="mt-6 md:flex md:flex-row md:gap-x-4">
             <div className="mt-6 p-6 flex flex-col justify-center items-center text-center bg-white border-gray-600 rounded shadow-xl md:flex-1">
-              <div className="text-4xl text-red-400">&#9733;</div>
+              <div className="text-4xl text-purple-800">&#9733;</div>
               <div className="mt-3 text-gray-500">
                 Ambiguous business objective thus misspent marketing budget
               </div>
             </div>
             <div className="mt-6 p-6 flex flex-col justify-center items-center text-center bg-white border-gray-600 rounded shadow-xl md:flex-1">
-              <div className="text-4xl text-red-400">&#9736;</div>
+              <div className="text-4xl text-purple-800">&#9736;</div>
               <div className="mt-3 text-gray-500">
                 Untapped resources and misaligned company direction
               </div>
             </div>
             <div className="mt-6 p-6 flex flex-col justify-center items-center text-center bg-white border-gray-600 rounded shadow-xl md:flex-1">
-              <div className="text-4xl text-red-400">&#9998;</div>
+              <div className="text-4xl text-purple-800">&#9998;</div>
               <div className="mt-3 text-gray-500">
                 Lacking proper measuring and learning process
               </div>
@@ -105,63 +369,66 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="solutions" className="bg-gray-200">
+        <section
+          id="solutions"
+          className={`bg-black ${styles.hero2} bg-fixed bg-cover`}
+        >
           <div className="py-20 px-10 md:max-w-2xl md:m-auto lg:max-w-4xl">
-            <h2 className="text-2xl font-bold">WHAT WE OFFER</h2>
-            <div className="mt-6 md:grid md:gap-6 md:max-w-2xl md:m-auto md:w-full md:grid-cols-2 md:mt-10">
-              <div className="mt-6 md:w-full md:h-48 md:mt-0">
-                <h3 className="font-semibold text-gray-800">
+            <h2 className="text-white text-2xl font-bold">WHAT WE OFFER</h2>
+            <div className="mt-6 md:grid md:gap-20 lg:gap-x-24 md:max-w-2xl md:m-auto md:w-full md:grid-cols-2 md:mt-10">
+              <div className="mt-10 md:w-full md:h-48 md:mt-0">
+                <h3 className="font-semibold text-gray-200">
                   Business Analysis &rarr;
                 </h3>
-                <p className="mt-3 text-sm text-justify text-gray-500">
+                <p className="mt-3 text-sm text-justify text-gray-300">
                   We will find out the area in the business that we can improve
                   and align it with your business direction to help you make
                   informed decision fast.
                 </p>
-                <p className="mt-3 text-sm italic font-bold text-justify text-gray-500">
+                <p className="mt-3 text-sm italic font-bold text-justify text-purple-800">
                   SWOT Analysis, Lean Canvas Model
                 </p>
               </div>
 
-              <div className="mt-6 md:w-full md:h-48 md:mt-0">
-                <h3 className="font-semibold text-gray-800">
+              <div className="mt-10 md:w-full md:h-48 md:mt-0">
+                <h3 className="font-semibold text-gray-200">
                   Website and web application Design & Development &rarr;
                 </h3>
-                <p className="mt-3 text-sm text-justify text-gray-500">
+                <p className="mt-3 text-sm text-justify text-gray-300">
                   We like beautiful things. Building visually pleasing and fast
                   performance platform will always be our aim. Be it Wordpress,
                   Shopify, or custom built.
                 </p>
-                <p className="mt-3 text-sm italic font-bold text-justify text-gray-500">
+                <p className="mt-3 text-sm italic font-bold text-justify text-purple-800">
                   Wordpress, Wix, Shopify, React
                 </p>
               </div>
 
-              <div className="mt-6 md:w-full md:h-48 md:mt-0">
-                <h3 className="font-semibold text-gray-800">
+              <div className="mt-10 md:w-full md:h-48 md:mt-0">
+                <h3 className="font-semibold text-gray-200">
                   Marketing Planning & Execution &rarr;
                 </h3>
-                <p className="mt-3 text-sm text-justify text-gray-500">
+                <p className="mt-3 text-sm text-justify text-gray-300">
                   While there are many platforms for advertisements, we don't
                   lose sight of who your customer really is. We don't simply
                   follow trends, we follow your target customers.
                 </p>
-                <p className="mt-3 text-sm italic font-bold text-justify text-gray-500">
+                <p className="mt-3 text-sm italic font-bold text-justify text-purple-800">
                   Google SEM & SEO, YouTube, Facebook, Instagram, Email
                 </p>
               </div>
 
-              <div className="mt-6 md:w-full md:h-48 md:mt-0">
-                <h3 className="font-semibold text-gray-800">
+              <div className="mt-10 md:w-full md:h-48 md:mt-0">
+                <h3 className="font-semibold text-gray-200">
                   Business Process Optimization & Implementation &rarr;
                 </h3>
-                <p className="mt-3 text-sm text-justify text-gray-500">
+                <p className="mt-3 text-sm text-justify text-gray-300">
                   Providing a seamless fulfillment process gives the customer
                   the best experience and hence, they may continue staying with
                   you. With some ready tools, we will make the optimization
                   process effortless.
                 </p>
-                <p className="mt-3 text-sm italic font-bold text-justify text-gray-500">
+                <p className="mt-3 text-sm italic font-bold text-justify text-purple-800">
                   Zapier, Respond, Google Workplace, QuickBooks, Notion, Trello
                 </p>
               </div>
@@ -184,53 +451,55 @@ export default function Home() {
           id="workflow"
           className="py-20 px-10 md:max-w-2xl md:m-auto lg:max-w-4xl"
         >
-          <h2 className="text-2xl font-bold">HOW WE CAN WORK TOGETHER</h2>
-          <div className="mt-6">
-            <div className="p-6 mt-6 bg-gray-600 shadow-xl md:h-48 md:w-full md:flex md:flex-row">
+          <h2 className="text-gray-800 text-2xl font-bold">
+            HOW WE CAN WORK TOGETHER
+          </h2>
+          <div className="mt-6 md:px-20">
+            <div className="p-6 mt-6 bg-gradient-to-br from-purple-900 to-black shadow-xl md:h-48 md:w-full md:flex md:flex-row">
               <div className="md:w-1/2">
                 <div className="font-semibold text-white">Step 1 :</div>
-                <div className="mt-3 text-sm text-justify text-gray-100">
+                <div className="mt-3 text-sm text-justify text-gray-200">
                   Share with us about your business. We will put ourselves in
                   your shoes and identify the areas that we could add value.
                 </div>
               </div>
               <img className="hidden md:inline-block md:w-1/2" src={undraw1} />
             </div>
-            <div className="p-6 mt-6 bg-gray-600 shadow-xl md:h-48 md:w-full md:flex md:flex-row">
+            <div className="p-6 mt-6 bg-gradient-to-br from-purple-900 to-black md:bg-gradient-to-bl shadow-xl md:h-48 md:w-full md:flex md:flex-row">
               <img className="hidden md:inline-block md:w-1/2" src={undraw2} />
               <div className="md:w-1/2">
                 <div className="font-semibold text-white">Step 2 :</div>
-                <div className="mt-3 text-sm text-justify text-gray-100">
+                <div className="mt-3 text-sm text-justify text-gray-200">
                   We will schedule a call for fact-finding & brainstorming if
                   your business matches our profile.
                 </div>
               </div>
             </div>
-            <div className="p-6 mt-6 bg-gray-600 shadow-xl md:h-48 md:w-full md:flex md:flex-row">
+            <div className="p-6 mt-6 bg-gradient-to-br from-purple-900 to-black shadow-xl md:h-48 md:w-full md:flex md:flex-row">
               <div className="md:w-1/2">
                 <div className="font-semibold text-white">Step 3 : </div>
-                <div className="mt-3 text-sm text-justify text-gray-100">
+                <div className="mt-3 text-sm text-justify text-gray-200">
                   We will propose solutions and discuss with you. Then, you tell
                   us your decision.
                 </div>
               </div>
               <img className="hidden md:inline-block md:w-1/2" src={undraw3} />
             </div>
-            <div className="p-6 mt-6 bg-gray-600 shadow-xl md:h-48 md:w-full md:flex md:flex-row">
+            <div className="p-6 mt-6 bg-gradient-to-br from-purple-900 to-black md:bg-gradient-to-bl shadow-xl md:h-48 md:w-full md:flex md:flex-row">
               <img className="hidden md:inline-block md:w-1/2" src={undraw4} />
               <div className="md:w-1/2">
                 <div className="font-semibold text-white">Step 4 :</div>
-                <div className="mt-3 text-sm text-justify text-gray-100">
+                <div className="mt-3 text-sm text-justify text-gray-200">
                   We will prepare the quotation for you to confirm the T&C and
                   agree on the milestones. Once payment is accepted, the deal is
                   sealed.
                 </div>
               </div>
             </div>
-            <div className="p-6 mt-6 bg-gray-600 shadow-xl md:h-48 md:w-full md:flex md:flex-row">
+            <div className="p-6 mt-6 bg-gradient-to-br from-purple-900 to-black shadow-xl md:h-48 md:w-full md:flex md:flex-row">
               <div className="md:w-1/2">
                 <div className="font-semibold text-white">Step 5 :</div>
-                <div className="mt-3 text-sm text-justify text-gray-100">
+                <div className="mt-3 text-sm text-justify text-gray-200">
                   We will kickoff the project with the 1st draft and action
                   plan, followed by timely review with you.
                 </div>
@@ -238,45 +507,55 @@ export default function Home() {
               <img className="hidden md:inline-block md:w-1/2" src={undraw5} />
             </div>
           </div>
-          <Link href="/getStarted" as="/get-started">
-            <a>
-              <button
-                type="button"
-                className="mt-10 leading-10 w-40 block text-sm font-semibold bg-red-600 text-white rounded shadow-md hover:bg-red-700 focus:outline-none mx-auto"
-              >
-                GET STARTED
-              </button>
-            </a>
-          </Link>
+        </section>
+
+        <section className="bg-gradient-to-br from-purple-900 to-black">
+          <div className="py-20 px-10 text-center flex flex-col justify-center items-center">
+            <h2 className="text-white text-2xl font-bold italic">
+              GOT A FEW MINUTES TO SPARE?
+            </h2>
+            <Link href="/getStarted" as="/get-started" replace>
+              <a>
+                <button
+                  type="button"
+                  className="mt-10 leading-10 w-40 block text-sm font-semibold bg-yellow-400 text-black rounded shadow-md hover:bg-yellow-500 focus:outline-none"
+                >
+                  GET STARTED
+                </button>
+              </a>
+            </Link>
+          </div>
         </section>
 
         <section
           id="testimonials"
           className="py-20 px-10 md:max-w-2xl md:m-auto lg:max-w-4xl"
         >
-          <h2 className="text-2xl font-bold">TESTIMONIALS</h2>
-          <div className="mt-6 text-gray-500 md:grid md:grid-cols-2 md:gap-x-4">
-            <div className="p-6 text-sm border-l-8 border-red-50 shadow-xl flex flex-col justify-between md:h-56">
+          <h2 className="text-2xl p-4 bg-gradient-to-r from-purple-900 to-black text-gray-200 font-bold">
+            TESTIMONIALS
+          </h2>
+          <div className="mt-6 text-gray-500 md:grid md:grid-cols-2 md:gap-x-16">
+            <div className="p-6 text-sm bg-white border-l-8 border-purple-900 shadow-xl flex flex-col justify-between md:h-56">
               <div className="italic text-justify">
                 "Motivo has helped package our offerings, execute marketing
                 campaigns, and set up SOP for operations. With all the processes
                 in place, running a co-working space becomes a bliss."
               </div>
               <div className="mt-6">
-                <p className="">Gabriel, Host</p>
+                <p>Gabriel, Host</p>
                 <p className="text-xs text-gray-800 font-semibold">
                   Triune Centre
                 </p>
               </div>
             </div>
-            <div className="mt-10 p-6 text-sm border-l-8 border-red-50 shadow-xl flex flex-col justify-between md:mt-0 md:h-56">
+            <div className="mt-10 p-6 text-sm bg-white border-l-8 border-purple-900 shadow-xl flex flex-col justify-between md:mt-0 md:h-56">
               <div className="italic text-justify">
                 "We have organized a few workshops successfully with the help
                 from Motivo. Couldn't imagine doing that without their
                 assistance."
               </div>
               <div className="mt-6">
-                <p className="">Jam, Co-founder</p>
+                <p>Jam, Co-founder</p>
                 <p className="text-xs text-gray-800 font-semibold">Get CTO</p>
               </div>
             </div>
@@ -287,32 +566,32 @@ export default function Home() {
           id="about"
           className="py-20 px-10 md:max-w-2xl md:m-auto lg:max-w-4xl"
         >
-          <h2 className="text-2xl font-bold">WHAT WE VALUE</h2>
-          <div className="mt-6 md:flex md:flex-row md:gap-x-4">
+          <h2 className="text-gray-800 text-2xl font-bold">WHAT WE VALUE</h2>
+          <div className="mt-6 md:flex md:flex-row md:gap-20">
             <div className="mt-6 md:flex-1">
-              <div className="w-auto text-gray-800 font-semibold border-red-400 border-b">
+              <div className="w-auto text-purple-800 font-semibold border-gray-800 border-b-2">
                 Open Communication
               </div>
-              <div className="mt-3 text-sm text-justify text-gray-500">
+              <div className="mt-3 text-sm text-gray-500">
                 Every thought is crucial in contributing to the project success.
                 We always welcome ideas and constructive feedbacks to improve
                 our performance.
               </div>
             </div>
             <div className="mt-6 md:flex-1">
-              <div className="w-auto text-gray-800 font-semibold border-red-400 border-b">
+              <div className="w-auto text-purple-800 font-semibold border-gray-800 border-b-2">
                 Mutual Respect
               </div>
-              <div className="mt-3 text-sm text-justify text-gray-500">
+              <div className="mt-3 text-sm text-gray-500">
                 We are grateful to be appointed as the marketing partner and are
                 committed to produce the best results for our clients.
               </div>
             </div>
             <div className="mt-6 md:flex-1">
-              <div className="w-auto text-gray-800 font-semibold border-red-400 border-b">
+              <div className="w-auto text-purple-800 font-semibold border-gray-800 border-b-2">
                 Honesty & Integrity
               </div>
-              <div className="mt-3 text-sm text-justify text-gray-500">
+              <div className="mt-3 text-sm text-gray-500">
                 We hold our standard high in business ethics. We constantly
                 strive to support genuine businesses to achieve their business
                 goals.
@@ -320,23 +599,41 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <div className="border-red-400 border w-4/5 m-auto lg:max-w-4xl"></div>
-        <section className="py-20 px-10 text-center flex flex-col justify-center items-center">
-          <h2 className="text-2xl font-bold">THINK YOU HAVE WHAT IT TAKES?</h2>
-          <Link href="/getStarted" as="/get-started">
-            <a>
-              <button
-                type="button"
-                className="mt-10 leading-10 w-40 block text-sm font-semibold bg-red-600 text-white rounded shadow-md hover:bg-red-700 focus:outline-none"
-              >
-                LET'S DO IT!
-              </button>
-            </a>
-          </Link>
+
+        <section className="p-10 h-80 md:h-96 md:max-w-2xl md:m-auto lg:max-w-4xl">
+          <div
+            className={`bg-black ${styles.quoteImage} bg-local bg-cover h-full grid place-content-center`}
+          >
+            <div className="px-10 md:px-4 md:w-2/3 lg:px-0 lg:mr-20">
+              <h2 className="text-white text-3xl font-bold italic md:text-4xl">
+                "<span className="text-purple-800">Everyone</span> is not your{" "}
+                <span className="text-purple-800">customer</span>."
+              </h2>
+              <p className="mt-6 text-gray-200">Seth Godin</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-gradient-to-br from-purple-900 to-black">
+          <div className="py-20 px-10 text-center flex flex-col justify-center items-center">
+            <h2 className="text-white text-2xl font-bold italic">
+              THINK YOU HAVE WHAT IT TAKES?
+            </h2>
+            <Link href="/getStarted" as="/get-started" replace>
+              <a>
+                <button
+                  type="button"
+                  className="mt-10 leading-10 w-40 block text-sm font-semibold bg-yellow-400 text-black rounded shadow-md hover:bg-yellow-500 focus:outline-none"
+                >
+                  GET STARTED
+                </button>
+              </a>
+            </Link>
+          </div>
         </section>
       </main>
 
-      <footer className="bg-gray-800 text-xs text-gray-100">
+      <footer className="bg-black text-xs text-gray-200">
         <div className="pt-10 px-10 md:max-w-2xl md:m-auto md:flex md:flex-row md:gap-x-4 lg:max-w-4xl">
           <div className="md:flex-1">
             <p className="font-semibold">Address :</p>
