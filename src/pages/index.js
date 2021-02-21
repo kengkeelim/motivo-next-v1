@@ -70,12 +70,6 @@ export default function Home() {
         } else if (yPos + navValue < solutionsSection.offsetTop) {
           setActiveLink(null);
         }
-        // else if (
-        //   yPos ===
-        //   documentValue.scrollHeight - documentValue.clientHeight
-        // ) {
-        //   setActiveLink(lastSection.id);
-        // }
       });
     }
   };
@@ -400,17 +394,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* <section className="px-10 mt-10">
-          <h2 className="text-2xl font-bold">TECHNOLOGY & TOOLS</h2>
-          <div className="mt-6 text-gray-600">
-            <div>Figma</div>
-            <div>Notion</div>
-            <div>Zapier</div>
-            <div>Respond.io</div>
-            <div>QuickBooks</div>
-          </div>
-        </section> */}
-
         <section
           id="workflow"
           className="py-20 px-10 md:max-w-2xl md:m-auto lg:max-w-4xl"
@@ -568,9 +551,9 @@ export default function Home() {
           <div
             className={`bg-black ${styles.quoteImage} bg-local bg-cover h-full grid place-content-center`}
           >
-            <div className="px-10 md:px-4 md:w-2/3 lg:px-0 lg:mr-20">
+            <div className="box-border px-10 md:px-4 md:w-2/3 lg:px-0 lg:mr-20">
               <h2 className="text-white text-3xl font-bold italic md:text-4xl">
-                "<span className="text-purple-800">Everyone</span> is not your
+                "<span className="text-purple-800">Everyone</span> is not your{" "}
                 <span className="text-purple-800">customer</span>."
               </h2>
               <p className="mt-6 text-gray-200">Seth Godin</p>
