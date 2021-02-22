@@ -1,10 +1,19 @@
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
 import JotformEmbed from "react-jotform-embed";
 
 import NavBar from "../components/navBar";
 
 function GetStarted() {
+  const [doneLoading, setDoneLoading] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      return setDoneLoading(true);
+    }, 3000);
+  });
+
   return (
     <div className="h-screen w-screen">
       <Head>
@@ -14,8 +23,20 @@ function GetStarted() {
 
       <section className="h-auto w-auto">
         <NavBar />
-        <JotformEmbed src="https://form.jotform.com/210382996785067" />
+        {doneLoading ? (
+          ""
+        ) : (
+          <div className="h-screen grid place-items-center text-4xl font-black text-purple-800 animate-pulse md:text-6xl">
+            loading...
+          </div>
+        )}
+
+        <JotformEmbed
+          className={doneLoading ? "block" : "hidden"}
+          src="https://form.jotform.com/210382996785067"
+        />
       </section>
+
       <footer className="h-auto bg-black text-xs text-gray-200">
         <div className="p-10 text-center">
           Copyright 2021 @ Motivo Ventures <br />- All Rights Reserved -
