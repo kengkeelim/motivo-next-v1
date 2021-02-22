@@ -184,7 +184,6 @@ export default function Home() {
                     : scrolling
                     ? "md:text-gray-400"
                     : "md:text-gray-200"
-                }
                 } text-sm font-semibold md:hover:text-yellow-500 transition-all`}
               >
                 <Link href="/#solutions">
@@ -203,8 +202,7 @@ export default function Home() {
                     : scrolling
                     ? "md:text-gray-400"
                     : "md:text-gray-200"
-                }
-              } text-sm font-semibold md:hover:text-yellow-500 transition-all`}
+                } text-sm font-semibold md:hover:text-yellow-500 transition-all`}
               >
                 <Link href="/#workflow">
                   <a>Workflow</a>
@@ -222,8 +220,7 @@ export default function Home() {
                     : scrolling
                     ? "md:text-gray-400"
                     : "md:text-gray-200"
-                }
-              } text-sm font-semibold md:hover:text-yellow-500 transition-all`}
+                } text-sm font-semibold md:hover:text-yellow-500 transition-all`}
               >
                 <Link href="/#testimonials">
                   <a>Testimonials</a>
