@@ -245,7 +245,7 @@ export default function Home() {
         <div className="h-full px-10 box-border grid place-items-center m-auto md:max-w-3xl lg:max-w-4xl">
           <div className="md:w-2/3 lg:w-5/6">
             <h1 className="text-5xl font-black text-white lg:text-7xl">
-              Set Your Business On Fire
+              Set Your Business On <span className="text-yellow-400">Fire</span>
             </h1>
             <p className="text-sm mt-6 text-gray-200 lg:text-base">
               We plan and execute marketing campaigns for businesses and
