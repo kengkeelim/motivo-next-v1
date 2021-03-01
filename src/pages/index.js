@@ -84,14 +84,14 @@ export default function Home() {
     return () => {
       document.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   useEffect(() => {
     document.addEventListener("touchstart", handleScroll);
     return () => {
       document.removeEventListener("touchstart", handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   if (typeof window !== "undefined") {
     const body = document.querySelector("body");

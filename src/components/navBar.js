@@ -23,14 +23,14 @@ function navBar(props) {
     return () => {
       document.removeEventListener("scroll", handleNavScroll);
     };
-  }, []);
+  }, [handleNavScroll]);
 
   useEffect(() => {
     document.addEventListener("touchstart", handleNavScroll);
     return () => {
       document.removeEventListener("touchstart", handleNavScroll);
     };
-  }, []);
+  }, [handleNavScroll]);
 
   return (
     <nav
