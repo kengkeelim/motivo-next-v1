@@ -26,7 +26,7 @@ function GetStarted() {
           <NavBar />
         ) : (
           <div className="h-screen grid place-items-center text-4xl font-black text-purple-800 animate-pulse md:text-6xl">
-            loading...
+            Loading...
           </div>
         )}
 
