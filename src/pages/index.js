@@ -226,7 +226,7 @@ export default function Home() {
                   <a>Testimonials</a>
                 </Link>
               </button>
-              <Link href="/getStarted" as="/get-started" replace>
+              <Link href="/start" as="/start" replace>
                 <a>
                   <button
                     type="button"
@@ -249,7 +249,7 @@ export default function Home() {
               streamline with their fulfillment processes for best customer
               experience.
             </p>
-            <Link href="/getStarted" as="/get-started" replace>
+            <Link href="/start" as="/start" replace>
               <a>
                 <button
                   type="button"
@@ -458,7 +458,7 @@ export default function Home() {
             <h2 className="text-white text-2xl font-bold italic">
               GOT A FEW MINUTES TO SPARE?
             </h2>
-            <Link href="/getStarted" as="/get-started" replace>
+            <Link href="/start" as="/start" replace>
               <a>
                 <button
                   type="button"
@@ -563,7 +563,7 @@ export default function Home() {
             <h2 className="text-white text-2xl font-bold italic">
               THINK YOU HAVE WHAT IT TAKES?
             </h2>
-            <Link href="/getStarted" as="/get-started" replace>
+            <Link href="/start" as="/start" replace>
               <a>
                 <button
                   type="button"
@@ -595,7 +595,7 @@ export default function Home() {
           </div>
           <div className="mt-6 md:flex-1 md:mt-0">
             <div className="mt-3 md:mt-0">
-              <Link href="/privacy" as="/privacy-policy">
+              <Link href="/privacy" as="/privacy">
                 <a>Privacy Policy</a>
               </Link>
             </div>

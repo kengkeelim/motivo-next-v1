@@ -22,9 +22,8 @@ function GetStarted() {
       </Head>
 
       <section className="h-auto w-auto">
-        <NavBar />
         {doneLoading ? (
-          ""
+          <NavBar />
         ) : (
           <div className="h-screen grid place-items-center text-4xl font-black text-purple-800 animate-pulse md:text-6xl">
             loading...
@@ -37,11 +36,15 @@ function GetStarted() {
         />
       </section>
 
-      <footer className="h-auto bg-black text-xs text-gray-200">
-        <div className="p-10 text-center">
-          Copyright 2021 @ Motivo Ventures <br />- All Rights Reserved -
-        </div>
-      </footer>
+      {doneLoading ? (
+        <footer className="h-auto bg-black text-xs text-gray-200">
+          <div className="p-10 text-center">
+            Copyright 2021 @ Motivo Ventures <br />- All Rights Reserved -
+          </div>
+        </footer>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
