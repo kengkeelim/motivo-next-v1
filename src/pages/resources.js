@@ -16,7 +16,7 @@ function Resources() {
         <div className="h-16 md:h-20"></div>
         <div className="p-10 bg-white max-w-screen-md mx-auto rounded md:px-20">
           <h1 className="text-4xl font-black text-center">
-            Tools Used In Building This Website
+            Tools Used To Build This Website
           </h1>
           <p className="mt-10 text-sm  text-gray-500">
             This page is created for the purpose of sharing and giving credits
