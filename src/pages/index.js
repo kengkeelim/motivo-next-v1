@@ -600,6 +600,11 @@ export default function Home() {
               </Link>
             </div>
             <div className="mt-3">
+              <Link href="/resources" as="/resources">
+                <a>Resources</a>
+              </Link>
+            </div>
+            <div className="mt-3">
               <Link href="/sitemap.xml">
                 <a>Site Map</a>
               </Link>
