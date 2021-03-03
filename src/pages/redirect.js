@@ -1,16 +1,7 @@
 import Head from "next/head";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 function Redirect() {
-  const router = useRouter();
-
-  useEffect(() => {
-    setTimeout(() => {
-      router.replace("/");
-    }, 2000);
-  }, []);
-
   return (
     <div className="h-screen w-screen">
       <Head>
@@ -19,13 +10,20 @@ function Redirect() {
         <meta name="robots" content="noindex" />
       </Head>
 
-      <section className="h-screen grid place-content-center text-center text-purple-800 p-10 md:px-20 animate-pulse">
+      <section className="h-screen grid place-content-center text-center text-purple-800 p-10 md:px-20">
         <h1 className="text-4xl font-black md:text-6xl">
           Thank You For Your Submission
         </h1>
-        <p className="text-xs mt-6 md:text-base md:mt-10">
-          Redirecting back to home page...
-        </p>
+        <Link href="/" as="/" replace>
+          <a>
+            <button
+              type="button"
+              className="mt-10 mx-auto leading-10 w-48 block text-sm font-semibold bg-yellow-400 text-black rounded shadow-md hover:bg-yellow-500 focus:outline-none"
+            >
+              BACK TO HOME PAGE
+            </button>
+          </a>
+        </Link>
       </section>
     </div>
   );
