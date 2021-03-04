@@ -118,6 +118,7 @@ export default function Home() {
           name="keywords"
           content="digital marketing malaysia, small business marketing, search engine marketing (SEM), social media content creation, web development service"
         />
+        <meta name="theme-color" content="#4C1D95" />
       </Head>
 
       <header
