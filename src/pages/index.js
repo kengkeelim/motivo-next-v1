@@ -354,7 +354,7 @@ export default function Home() {
                   and align it with your business direction to help you make
                   informed decision fast.
                 </p>
-                <p className="mt-3 text-sm italic font-bold text-justify text-purple-800">
+                <p className="mt-3 text-sm italic font-bold text-justify text-purple-500">
                   SWOT Analysis, Lean Canvas Model
                 </p>
               </div>
@@ -368,7 +368,7 @@ export default function Home() {
                   performance platform will always be our aim. Be it Wordpress,
                   Shopify, or custom built.
                 </p>
-                <p className="mt-3 text-sm italic font-bold text-justify text-purple-800">
+                <p className="mt-3 text-sm italic font-bold text-justify text-purple-500">
                   Wordpress, Wix, Shopify, React
                 </p>
               </div>
@@ -382,7 +382,7 @@ export default function Home() {
                   lose sight of who your customer really is. We don't simply
                   follow trends, we follow your target customers.
                 </p>
-                <p className="mt-3 text-sm italic font-bold text-justify text-purple-800">
+                <p className="mt-3 text-sm italic font-bold text-justify text-purple-500">
                   Google SEM & SEO, YouTube, Facebook, Instagram, Email
                 </p>
               </div>
@@ -397,7 +397,7 @@ export default function Home() {
                   you. With some ready tools, we will make the optimization
                   process effortless.
                 </p>
-                <p className="mt-3 text-sm italic font-bold text-justify text-purple-800">
+                <p className="mt-3 text-sm italic font-bold text-justify text-purple-500">
                   Zapier, Respond, Google Workplace, QuickBooks, Notion, Trello
                 </p>
               </div>
@@ -595,8 +595,8 @@ export default function Home() {
           >
             <div className="box-border px-10 md:px-4 md:w-2/3 lg:px-0 lg:mr-20">
               <h2 className="text-white text-3xl font-bold italic md:text-4xl">
-                "<span className="text-purple-800">Everyone</span> is not your{" "}
-                <span className="text-purple-800">customer</span>."
+                "<span className="text-purple-500">Everyone</span> is not your{" "}
+                <span className="text-purple-500">customer</span>."
               </h2>
               <p className="mt-6 text-gray-200">Seth Godin</p>
             </div>
