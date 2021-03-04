@@ -128,6 +128,7 @@ export default function Home() {
         <NavBar>
           <div className="menu">
             <button
+              aria-label="menu"
               type="button"
               className={`block ${
                 scrolling ? "text-gray-400" : "text-gray-200"
@@ -146,8 +147,9 @@ export default function Home() {
                   : `${styles.navItems}`
               }
             >
-              <div className="cancel w-3/5 md:hidden">
+              <div className="close w-3/5 md:hidden">
                 <button
+                  aria-label="close"
                   type="button"
                   className="block float-right focus:outline-none"
                   onClick={() => setOpenMenu(!openMenu)}
