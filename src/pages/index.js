@@ -229,6 +229,7 @@ export default function Home() {
               <Link href="/start" as="/start" replace>
                 <a>
                   <button
+                    id="ctaNav"
                     type="button"
                     className="leading-10 w-40 block text-sm font-semibold bg-yellow-400 text-black rounded shadow-md hover:bg-yellow-500 focus:outline-none"
                   >
