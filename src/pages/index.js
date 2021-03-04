@@ -409,10 +409,18 @@ export default function Home() {
                   your shoes and identify the areas that we could add value.
                 </div>
               </div>
-              <img className="hidden md:inline-block md:w-1/2" src={undraw1} />
+              <img
+                className="hidden md:inline-block md:w-1/2"
+                src={undraw1}
+                alt="customer survey"
+              />
             </div>
             <div className="p-6 mt-6 bg-gradient-to-br from-purple-900 to-black md:bg-gradient-to-bl shadow-xl md:h-48 md:w-full md:flex md:flex-row">
-              <img className="hidden md:inline-block md:w-1/2" src={undraw2} />
+              <img
+                className="hidden md:inline-block md:w-1/2"
+                src={undraw2}
+                alt="call scheduling"
+              />
               <div className="md:w-1/2">
                 <div className="font-semibold text-white">Step 2 :</div>
                 <div className="mt-3 text-sm text-justify text-gray-200">
@@ -429,10 +437,18 @@ export default function Home() {
                   us your decision.
                 </div>
               </div>
-              <img className="hidden md:inline-block md:w-1/2" src={undraw3} />
+              <img
+                className="hidden md:inline-block md:w-1/2"
+                src={undraw3}
+                alt="discussion"
+              />
             </div>
             <div className="p-6 mt-6 bg-gradient-to-br from-purple-900 to-black md:bg-gradient-to-bl shadow-xl md:h-48 md:w-full md:flex md:flex-row">
-              <img className="hidden md:inline-block md:w-1/2" src={undraw4} />
+              <img
+                className="hidden md:inline-block md:w-1/2"
+                src={undraw4}
+                alt="closed deal"
+              />
               <div className="md:w-1/2">
                 <div className="font-semibold text-white">Step 4 :</div>
                 <div className="mt-3 text-sm text-justify text-gray-200">
@@ -450,7 +466,11 @@ export default function Home() {
                   plan, followed by timely review with you.
                 </div>
               </div>
-              <img className="hidden md:inline-block md:w-1/2" src={undraw5} />
+              <img
+                className="hidden md:inline-block md:w-1/2"
+                src={undraw5}
+                alt="project kickoff"
+              />
             </div>
           </div>
         </section>
