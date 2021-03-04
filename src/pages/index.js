@@ -253,6 +253,7 @@ export default function Home() {
             <Link href="/start" as="/start" replace>
               <a>
                 <button
+                  id="ctaHeader"
                   type="button"
                   className="mt-10 leading-10 w-40 block text-sm font-semibold bg-yellow-400 text-black rounded shadow-md hover:bg-yellow-500 focus:outline-none"
                 >
@@ -462,6 +463,7 @@ export default function Home() {
             <Link href="/start" as="/start" replace>
               <a>
                 <button
+                  id="ctaS1"
                   type="button"
                   className="mt-10 leading-10 w-40 block text-sm font-semibold bg-yellow-400 text-black rounded shadow-md hover:bg-yellow-500 focus:outline-none"
                 >
@@ -567,6 +569,7 @@ export default function Home() {
             <Link href="/start" as="/start" replace>
               <a>
                 <button
+                  id="ctaS2"
                   type="button"
                   className="mt-10 leading-10 w-40 block text-sm font-semibold bg-yellow-400 text-black rounded shadow-md hover:bg-yellow-500 focus:outline-none"
                 >

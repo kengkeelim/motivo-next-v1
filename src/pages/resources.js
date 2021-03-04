@@ -261,6 +261,7 @@ function Resources() {
             <Link href="/start" as="/start" replace>
               <a>
                 <button
+                  id="ctaRsrc"
                   type="button"
                   className="mt-10 mx-auto leading-10 w-40 block text-sm font-semibold bg-yellow-400 text-black rounded shadow-md hover:bg-yellow-500 focus:outline-none"
                 >
