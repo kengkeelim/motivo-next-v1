@@ -420,18 +420,20 @@ export default function Home() {
                 </div>
               </div>
               <img
+                width="304px"
+                height="144px"
                 className="hidden md:inline-block md:w-1/2"
                 src={undraw1}
                 alt="customer survey"
-                style={{ "max-width": "304px", "max-height": "144px" }}
               />
             </div>
             <div className="p-6 mt-6 bg-gradient-to-br from-purple-900 to-black md:bg-gradient-to-bl shadow-xl md:h-48 md:w-full md:flex md:flex-row">
               <img
+                width="304px"
+                height="144px"
                 className="hidden md:inline-block md:w-1/2"
                 src={undraw2}
                 alt="call scheduling"
-                style={{ "max-width": "304px", "max-height": "144px" }}
               />
               <div className="md:w-1/2">
                 <div className="font-semibold text-white">Step 2 :</div>
@@ -450,18 +452,20 @@ export default function Home() {
                 </div>
               </div>
               <img
+                width="304px"
+                height="144px"
                 className="hidden md:inline-block md:w-1/2"
                 src={undraw3}
                 alt="discussion"
-                style={{ "max-width": "304px", "max-height": "144px" }}
               />
             </div>
             <div className="p-6 mt-6 bg-gradient-to-br from-purple-900 to-black md:bg-gradient-to-bl shadow-xl md:h-48 md:w-full md:flex md:flex-row">
               <img
+                width="304px"
+                height="144px"
                 className="hidden md:inline-block md:w-1/2"
                 src={undraw4}
                 alt="closed deal"
-                style={{ "max-width": "304px", "max-height": "144px" }}
               />
               <div className="md:w-1/2">
                 <div className="font-semibold text-white">Step 4 :</div>
@@ -481,10 +485,11 @@ export default function Home() {
                 </div>
               </div>
               <img
+                width="304px"
+                height="144px"
                 className="hidden md:inline-block md:w-1/2"
                 src={undraw5}
                 alt="project kickoff"
-                style={{ "max-width": "304px", "max-height": "144px" }}
               />
             </div>
           </div>
