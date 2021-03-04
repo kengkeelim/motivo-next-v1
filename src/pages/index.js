@@ -108,6 +108,14 @@ export default function Home() {
     <div className="h-screen w-screen">
       <Head>
         <title>Motivo | A Marketing Company</title>
+        <meta
+          name="description"
+          content="We help SMEs develop websites, run pay per click (PPC) campaigns, create contents for social media, and streamline fulfillment processes for best customer experience."
+        />
+        <meta
+          name="keywords"
+          content="digital marketing malaysia, small business marketing, search engine marketing (SEM), social media content creation, web development service"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
