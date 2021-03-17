@@ -123,7 +123,7 @@ export default function Home() {
 
       <header
         id="header"
-        className={`h-screen box-border ${styles.hero} bg-cover bg-no-repeat bg-local md:h-5/6 xl:h-screen`}
+        className={`h-screen box-border bg-black ${styles.hero} bg-cover bg-no-repeat bg-local md:h-5/6 xl:h-screen`}
       >
         <NavBar>
           <div className="menu">
