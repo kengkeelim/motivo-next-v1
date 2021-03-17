@@ -17,7 +17,7 @@ export default function Home() {
   const [openMenu, setOpenMenu] = useState(false);
   const [activeLink, setActiveLink] = useState(null);
   const [sectionValue, setSectionValue] = useState(null);
-  const [navValue, setNavValue] = useState(null);
+  const [navHeight, setNavHeight] = useState(null);
   const [scrolling, setScrolling] = useState(null);
 
   const getSectionInfo = () => {
@@ -39,39 +39,44 @@ export default function Home() {
   const getNavInfo = () => {
     const nav = document.querySelector("nav");
     if (nav) {
-      setNavValue(nav.offsetHeight);
+      setNavHeight(nav.offsetHeight);
     } else if (window.innerWidth >= 768) {
-      setNavValue(80);
+      setNavHeight(80);
     } else {
-      setNavValue(64);
+      setNavHeight(64);
     }
   };
 
-  const handleScroll = () => {
-    const yPos = window.pageYOffset;
-    let solutionsSection = {};
-
+  const checkScroll = (yPos) => {
     if (yPos === 0) {
       setScrolling(false);
     } else {
       setScrolling(true);
     }
+  };
 
+  const checkActiveLink = (yPos) => {
     if (sectionValue) {
-      solutionsSection = sectionValue[0];
+      let solutionsSection = sectionValue[0];
 
       sectionValue.forEach((section) => {
         // When scroll within the section, set nav link to active.
         if (
-          section.offsetTop <= yPos + navValue &&
+          section.offsetTop <= yPos + navHeight &&
           section.offsetTop + section.offsetHeight > yPos
         ) {
           setActiveLink(section.id);
-        } else if (yPos + navValue < solutionsSection.offsetTop) {
+        } else if (yPos + navHeight < solutionsSection.offsetTop) {
           setActiveLink(null);
         }
       });
     }
+  };
+
+  const handleScroll = () => {
+    const yPos = window.pageYOffset;
+    checkScroll(yPos);
+    checkActiveLink(yPos);
   };
 
   useEffect(() => {
