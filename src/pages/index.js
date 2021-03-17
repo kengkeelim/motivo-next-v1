@@ -115,6 +115,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <title>Motivo | A Marketing Company</title>
         <link rel="canonical" href="https://motivo.marketing/" />
+        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
         <meta
           name="description"
           content="We help SMEs develop websites, run pay per click (PPC) campaigns, create contents for social media, and streamline fulfillment processes for best customer experience."
