@@ -664,7 +664,7 @@ export default function Home() {
           </div>
         </div>
         <div className="p-10 text-center">
-          Copyright 2021 @ Motivo Ventures <br />- All Rights Reserved -
+          Copyright 2021 @ Motivo Ventures -- 202003227668 (003155757-H) <br />- All Rights Reserved -
         </div>
       </footer>
     </div>
